@@ -1,0 +1,39 @@
+Promeni sifru u docker-compose za mysql
+
+application je ime .py gde je app
+flask --app application db init  = za initicijalizaciju migrate foldera,
+pa migrate pa upgrade
+localhost:8080 - sparkmaster
+localhost:8083 - adminer
+
+https://ganache.dev/#eth_getBalance
+curl.exe http://127.0.0.1:8545 -X POST -H "Content-Type: application/json" -d '{\"jsonrpc\": \"2.0\", \"method\": \"eth_accounts\"}'
+
+curl.exe http://127.0.0.1:8545 -X POST -H "Content-Type: application/json" -d '{\"jsonrpc\": \"2.0\", \"method\": \"eth_getBalance\", \"params\":[\"adr\", \"latest\"]}'
+
+za ugovor:
+docker run -v sources_path:/sources ethereum/solc:0.8.18 -0 /sources/output --abi --bin /sources/Ugovor.sol
+
+param ( [string] $file_path )
+
+Remove-Item ./solidity/output -Recurse -ErrorAction Ignore
+docker run -v ${PWD}/solidity:/sources ethereum/solc:0.8.18 -o /sources/output --abi --bin /sources/$file_path
+
+docker logs img_name
+
+python .\main.py --type all --authentication-url http://127.0.0.1:5002 --jwt-secret JWT_SECRET_KEY --roles-field role --owner-role Vlasnik --customer-role Kupac --courier-role Kurir --with-authentication --owner-url http://127.0.0.1:5004 --customer-url http://127.0.0.1:5005 --courier-url http://127.0.0.1:5006 --with-blockchain --provider-url http://127.0.0.1:8545 --customer-keys-path ./keys.json --customer-passphrase iep_project --owner-private-key 0xe7ef458d316c23736ae73ef2483a983a53fcf3e5812cf43c2870d3b1d9e95d66 --courier-private-key 0xbe07088da4ecd73ecb3d9d806cf391dfaef5f15f9ee131265da8af81728a4379
+
+
+#   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8545"]
+  #     timeout: 3s
+  #     retries: 10
+  # initOwnerAccount:
+  #   image: accountinit
+  #   environment:
+  #     - GANACHE_URL=http://ganache:8545
+  #   depends_on:
+  #     ganache:
+  #       condition: service_healthy
+  #   networks:
+  #     - storeNet
